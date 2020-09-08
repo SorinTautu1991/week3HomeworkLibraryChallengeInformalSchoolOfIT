@@ -3,14 +3,11 @@ package com.tse;
 import java.util.ArrayList;
 
 public class Novel extends Book {
-    public String type;
+    private String type;
 
-
-
-    public Novel(String name, int nrPages, String type) {
-        super(name, nrPages);
+    public Novel(String name, int numberOfPages, String type) {
+        super(name, numberOfPages);
         this.type = type;
-
     }
 
     public String getType() {

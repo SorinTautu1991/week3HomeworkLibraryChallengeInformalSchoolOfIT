@@ -1,72 +1,50 @@
 package com.tse;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Main {
-    public Scanner scanner = new Scanner(System.in);
+
+    private List<Book> books = new ArrayList<>();
+
 
     public static void main(String[] args) {
-
-        Main main = new Main();
-        main.libraryMenu();
-
+        Main library = new Main();
+        Book book1 = new Novel("Dostoievsky", 290, "Drama");
+        Book book2 = new Album("Planet Earth", 560, "hard paper");
+        library.addBook(book1);
+        library.addBook(book2);
+        library.listBooks();
 
     }
 
-    public void libraryMenu(){
-        Book books = new Book("Test", 0);
 
 
-        boolean quit = false;
-        while(!quit){
-            System.out.println("----------------------------------------------------------------------\n" +
-                    "Welcome to the library. Please select the actions you want to perform: \n" +
-                    "1. Add book ->> Novel \n" +
-                    "2. Add book ->> Album \n" +
-                    "3. Remove book \n" +
-                    "4. Print books \n" +
-                    "5. Quit the application \n");
+    public boolean addBook(Book book){
+        books.add(book);
+        return true;
+    }
 
-            int input = scanner.nextInt();
-            switch(input){
-                case 1:
-                    System.out.println("Please enter the name of the novel you want to add: ");
-                    scanner.nextLine();
-                    String nameNovel = scanner.nextLine();
-                    System.out.println("Please enter the number of pages the novel has: ");
-                    int numberPagesNovel = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Please enter the type of the novel: ");
-                    String typeNovel = scanner.nextLine();
-                    Novel newNovel = new Novel(nameNovel, numberPagesNovel, typeNovel);
-                    books.addBook(newNovel);
-                    break;
-                case 2: System.out.println("Please enter the name of the album you want to add: ");
-                    scanner.nextLine();
-                    String nameAlbum = scanner.nextLine();
-                    System.out.println("Please enter the number of pages the album has: ");
-                    int numberPagesAlbum = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Please enter the paper quality of the album: ");
-                    String paperQuality = scanner.nextLine();
-                    Album newAlbum = new Album(nameAlbum,numberPagesAlbum, paperQuality);
-                    books.addBook(newAlbum);
-                    break;
-                case 3:
-                    System.out.println("Please enter the name of the book you want to remove: ");
-                    scanner.nextLine();
-                    String nameBook = scanner.nextLine();
-                    books.removeBook(books.findIndexremoveBook(nameBook));
+    public boolean deleteBook(String name){
+        for(Book book: books){
+            if(book.getName().equals(name)){
+                books.remove(book);
+                return true;
+            }
+        }
+        System.out.println("You don`t have this book in your library.");
+        return false;
+    }
 
-                    break;
-                case 4: books.printBooks();
-                    break;
-                case 5:
-                    System.out.println("You quitted the application. Have a nice day !");
-                    quit = true;
-
+    public void listBooks(){
+        for(Book book:books){
+            if(book instanceof Novel){
+                System.out.println("Book name: " + book.getName() + " nr. pages: " + book.getNumberOfPages() + " type: " + ((Novel) book).getType());
+            } else if(book instanceof Album){
+                System.out.println("Book name: " + book.getName() + " nr. pages: " + book.getNumberOfPages() + " paper quality: " + ((Album) book).getPaperQuality());
             }
         }
     }
+
+
 }

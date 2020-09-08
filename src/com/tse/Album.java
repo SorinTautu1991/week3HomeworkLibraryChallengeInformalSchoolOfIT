@@ -1,14 +1,14 @@
 package com.tse;
 
 public class Album extends Book{
-    public String paperQ;
+    private String paperQuality;
 
-    public Album(String name, int nrPages, String paperQ) {
-        super(name, nrPages);
-        this.paperQ = paperQ;
+    public Album(String name, int numberOfPages, String paperQuality) {
+        super(name, numberOfPages);
+        this.paperQuality = paperQuality;
     }
 
-    public String getPaperQ() {
-        return paperQ;
+    public String getPaperQuality() {
+        return paperQuality;
     }
 }
